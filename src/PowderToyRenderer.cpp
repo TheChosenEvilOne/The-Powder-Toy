@@ -16,6 +16,7 @@
 #include "client/GameSave.h"
 #include "simulation/Simulation.h"
 
+#include "angelscript.h"
 
 void EngineProcess() {}
 void ClipboardPush(std::string) {}
@@ -59,6 +60,14 @@ void writeFile(std::string filename, std::vector<char> & fileData)
 int main(int argc, char *argv[])
 {	
 	ui::Engine * engine;
+	asIScriptEngine *asEngine = asCreateScriptEngine();
+	if( asEngine == 0 )
+	{
+		cout << "Failed to create script engine." << endl;
+		return -1;
+	}
+	cout << asEngine << endl;
+
 	std::string outputPrefix, inputFilename;
 	std::vector<char> inputFile;
 	std::string ppmFilename, ptiFilename, ptiSmallFilename, pngFilename, pngSmallFilename;
